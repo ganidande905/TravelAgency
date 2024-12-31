@@ -25,5 +25,19 @@ void bookTransport(User loggedInUser) {
     bookings[bookingCount].user = loggedInUser;
     bookingCount++;
 
+
+    FILE *bookingFile = fopen(BOOKING_FILE, "a"); 
+    if (!bookingFile) {
+        printf("Error: Could not open booking file for writing.\n");
+        return;
+    }
+
+    fprintf(bookingFile, "%s %s %s %s %s %s %.2f\n",
+            loggedInUser.username, loggedInUser.name, loggedInUser.phone, loggedInUser.email,
+            transports[transportChoice - 1].name, transports[transportChoice - 1].city,
+            transports[transportChoice - 1].price);
+
+    fclose(bookingFile);
+
     printf("Booking successful! Enjoy your trip.\n");
 }

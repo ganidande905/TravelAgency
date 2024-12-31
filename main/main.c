@@ -50,7 +50,7 @@ int main() {
 
         if (isAdmin(loggedInUser)) {
             switch (userChoice) {
-                case 5: viewPackages(); break;
+                case 1: viewPackages(); break;
                 case 6: addTransport(); break;
                 case 7: removeTransport(); break;
                 case 8: modifyTransportCost(); break;
@@ -61,7 +61,7 @@ int main() {
             switch (userChoice) {
                 case 1: viewPackages(); break;
                 case 2: bookTransport(loggedInUser); break;
-                case 3: break; // View Bookings (Not implemented)
+                case 3: viewBookings(loggedInUser); break;
                 case 4: cancelBooking(loggedInUser); break;
                 case 5: searchTransportByDestination(); break;
                 case 6: return 0;
