@@ -50,7 +50,7 @@ int main() {
 
         if (isAdmin(loggedInUser)) {
             switch (userChoice) {
-                case 1: viewPackages(); break;
+                case 5: viewPackages(); break;
                 case 6: addTransport(); break;
                 case 7: removeTransport(); break;
                 case 8: modifyTransportCost(); break;
