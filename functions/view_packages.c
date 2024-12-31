@@ -9,7 +9,8 @@ void viewPackages() {
     printf("\nAvailable Transport Packages:\n");
     for (int i = 0; i < transportCount; i++) {
         printf("%d. %s\n", i + 1, transports[i].name);
-        printf("   Destination: %s, %s\n", transports[i].city, transports[i].state);
+        printf("   Destination: %s\n", transports[i].city);
+        printf("   Starting Point: %s\n", transports[i].starting_point);
         printf("   Time: %s\n", transports[i].time);
         printf("   Type: %s\n", transports[i].transportType);
         printf("   Price: %.2f\n\n", transports[i].price);

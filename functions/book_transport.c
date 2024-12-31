@@ -21,20 +21,30 @@ void bookTransport(User loggedInUser) {
         return;
     }
 
-    bookings[bookingCount].transport = transports[transportChoice - 1];
+    // Save booking in memory
     bookings[bookingCount].user = loggedInUser;
+    strcpy(bookings[bookingCount].name, transports[transportChoice - 1].name);
+    strcpy(bookings[bookingCount].starting_point, transports[transportChoice - 1].starting_point);
+    strcpy(bookings[bookingCount].city, transports[transportChoice - 1].city);
+    strcpy(bookings[bookingCount].time, transports[transportChoice - 1].time);
+    strcpy(bookings[bookingCount].transportType, transports[transportChoice - 1].transportType);
+    bookings[bookingCount].price = transports[transportChoice - 1].price;
     bookingCount++;
 
-
-    FILE *bookingFile = fopen(BOOKING_FILE, "a"); 
+    // Save booking to file
+    FILE *bookingFile = fopen(BOOKING_FILE, "a");
     if (!bookingFile) {
         printf("Error: Could not open booking file for writing.\n");
         return;
     }
 
     fprintf(bookingFile, "%s %s %s %s %s %s %.2f\n",
-            loggedInUser.username, loggedInUser.name, loggedInUser.phone, loggedInUser.email,
-            transports[transportChoice - 1].name, transports[transportChoice - 1].city,
+            loggedInUser.username,
+            transports[transportChoice - 1].name,
+            transports[transportChoice - 1].starting_point,
+            transports[transportChoice - 1].city,
+            transports[transportChoice - 1].time,
+            transports[transportChoice - 1].transportType,
             transports[transportChoice - 1].price);
 
     fclose(bookingFile);

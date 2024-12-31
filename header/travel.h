@@ -18,7 +18,7 @@
 typedef struct {
     char name[MAX_NAME_LENGTH];
     char city[MAX_NAME_LENGTH];
-    char state[MAX_NAME_LENGTH];
+    char starting_point[MAX_NAME_LENGTH];
     char time[TIME_LENGTH];
     char transportType[MAX_NAME_LENGTH];
     float price;
@@ -35,6 +35,12 @@ typedef struct {
 typedef struct {
     Transport transport;
     User user;
+    char name[MAX_NAME_LENGTH];
+    char city[MAX_NAME_LENGTH];
+    char starting_point[MAX_NAME_LENGTH];
+    char time[TIME_LENGTH];
+    char transportType[MAX_NAME_LENGTH];
+    float price;
 } Booking;
 
 // Global Variables
@@ -58,5 +64,6 @@ int userLogin(User *loggedInUser);
 int adminLogin(User *loggedInUser);
 int isAdmin(User user);
 void userRegistration();
-
+void viewBookings(User loggedInUser);
+void loadBookingsFromFile();
 #endif

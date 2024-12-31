@@ -9,7 +9,7 @@ void searchTransportByDestination() {
 
     printf("\nSearch results for transports going to %s:\n", destination);
     for (int i = 0; i < transportCount; i++) {
-        if (strstr(transports[i].city, destination) || strstr(transports[i].state, destination)) {
+        if (strstr(transports[i].city, destination) || strstr(transports[i].starting_point, destination)) {
             printf("%d. %s\n", i + 1, transports[i].name);
         }
     }

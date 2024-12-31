@@ -20,7 +20,7 @@ void removeTransport() {
             FILE *transportFile = fopen(TRANSPORT_FILE, "w");
             for (int j = 0; j < transportCount; j++) {
                 fprintf(transportFile, "%s %s %s %s %s %.2f\n", transports[j].name, transports[j].city,
-                        transports[j].state, transports[j].time, transports[j].transportType, transports[j].price);
+                        transports[j].starting_point, transports[j].time, transports[j].transportType, transports[j].price);
             }
             fclose(transportFile);
 

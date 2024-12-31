@@ -7,21 +7,38 @@ void saveTransportToFile(Transport newTransport) {
         return;
     }
 
-    fprintf(transportFile, "%s %s %s %s %s %.2f\n", newTransport.name, newTransport.city, newTransport.state,
-            newTransport.time, newTransport.transportType, newTransport.price);
+    fprintf(transportFile, "%s %s %s %s %s %.2f\n", 
+            newTransport.name, 
+            newTransport.starting_point, 
+            newTransport.city, 
+            newTransport.time, 
+            newTransport.transportType, 
+            newTransport.price);
+
     fclose(transportFile);
 }
 
 void loadTransportsFromFile() {
     FILE *transportFile = fopen(TRANSPORT_FILE, "r");
     if (!transportFile) {
+        printf("No transport data found.\n");
         return;
     }
 
-    while (fscanf(transportFile, "%s %s %s %s %s %f", transports[transportCount].name, transports[transportCount].city,
-                  transports[transportCount].state, transports[transportCount].time,
-                  transports[transportCount].transportType, &transports[transportCount].price) != EOF) {
-        transportCount++;
+    char line[256];
+    while (fgets(line, sizeof(line), transportFile)) {
+
+        if (sscanf(line, "%s %s %s %s %s %f", 
+                   transports[transportCount].name, 
+                   transports[transportCount].starting_point, 
+                   transports[transportCount].city, 
+                   transports[transportCount].time, 
+                   transports[transportCount].transportType, 
+                   &transports[transportCount].price) == 6) {
+            transportCount++;
+        } else {
+            printf("DEBUG: Failed to parse line: %s\n", line);
+        }
     }
 
     fclose(transportFile);

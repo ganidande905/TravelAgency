@@ -1,32 +1,40 @@
 #include "../header/travel.h"
 
-void viewBookings(User loggedInUser) {
-    FILE *bookingFile = fopen(BOOKING_FILE, "r");
-    if (!bookingFile) {
+
+void loadBookingsFromFIle(){
+    FILE *bookingFile = fopen(BOOKING_FILE,"r");
+    if(!bookingFile){
         printf("No bookings found.\n");
         return;
     }
-
-    char username[MAX_NAME_LENGTH], name[MAX_NAME_LENGTH], phone[MAX_NAME_LENGTH], email[MAX_NAME_LENGTH];
-    char transportName[MAX_NAME_LENGTH], city[MAX_NAME_LENGTH];
-    float price;
-    int found = 0;
-
-    printf("\nYour Bookings:\n");
-    while (fscanf(bookingFile, "%s %s %s %s %s %s %f", 
-                  username, name, phone, email, 
-                  transportName, city, &price) != EOF) {
-        if (strcmp(username, loggedInUser.username) == 0) {
-            printf("Transport: %s\n", transportName);
-            printf("City: %s\n", city);
-            printf("Price: %.2f\n\n", price);
-            found = 1;
+    char line[256];
+    while (fgets(line, sizeof(line), bookingFile)){
+        if (sscanf(line, "%s %s %s %s %s %f",
+                bookings[bookingCount].name,
+                bookings[bookingCount].starting_point,
+                bookings[bookingCount].city,
+                bookings[bookingCount].time,
+                bookings[bookingCount].transportType,
+                &bookings[bookingCount].price) == 6){
+            bookingCount++;
+        } else{
+            printf("DEBUG: Failed to parse line: %s\n", line);
         }
     }
+}
+void viewBookings(User loggedInUser) {
+     if (bookingCount == 0) {
+        printf("No Bookings available.\n");
+        return;
+    }
 
-    fclose(bookingFile);
-
-    if (!found) {
-        printf("You have no bookings.\n");
+    printf("\nYour booking(s):\n");
+    for (int i = 0; i < bookingCount; i++) {
+        printf("%d. %s\n", i + 1, bookings[i].name);
+        printf("   Destination: %s\n", bookings[i].city);
+        printf("   Starting Point: %s\n", bookings[i].starting_point);
+        printf("   Time: %s\n", bookings[i].time);
+        printf("   Type: %s\n", bookings[i].transportType);
+        printf("   Price: %.2f\n\n", bookings[i].price);
     }
 }

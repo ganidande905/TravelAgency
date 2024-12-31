@@ -16,9 +16,9 @@ void addTransport() {
     fgets(newTransport.city, MAX_NAME_LENGTH, stdin);
     newTransport.city[strcspn(newTransport.city, "\n")] = '\0';
 
-    printf("Enter state: ");
-    fgets(newTransport.state, MAX_NAME_LENGTH, stdin);
-    newTransport.state[strcspn(newTransport.state, "\n")] = '\0';
+    printf("Enter starting_point: ");
+    fgets(newTransport.starting_point, MAX_NAME_LENGTH, stdin);
+    newTransport.starting_point[strcspn(newTransport.starting_point, "\n")] = '\0';
 
     printf("Enter transport time: ");
     fgets(newTransport.time, TIME_LENGTH, stdin);
