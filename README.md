@@ -26,3 +26,10 @@ A **C language-based command-line application** for managing **tour bookings** w
 | **Customer** | Browse tours, book trips, modify/cancel own bookings |
 
 ---
+
+## How to run
+
+```
+make clean
+make
+```
